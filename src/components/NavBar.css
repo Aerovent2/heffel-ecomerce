@@ -1,0 +1,19 @@
+h1{
+    color: gray;
+}
+img{
+    max-height: 100px;
+}
+div{
+    display: flex;
+    align-items:  center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: aquamarine;
+}
+
+a{
+    text-decoration: none;
+    padding: 2px;
+    margin: 2px;
+}
