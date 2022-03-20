@@ -2,9 +2,9 @@ h1{
     color: gray;
 }
 img{
-    max-height: 100px;
+    height: 100px;
 }
-div{
+.NavBar{
     display: flex;
     align-items:  center;
     justify-content: space-between;
@@ -16,4 +16,17 @@ a{
     text-decoration: none;
     padding: 2px;
     margin: 2px;
+}
+
+svg{
+    margin: 10px;
+}
+
+.main{
+    height: 800px;
+}
+
+
+.ItemListContainer h2{
+    text-align: center;
 }

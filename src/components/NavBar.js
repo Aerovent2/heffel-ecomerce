@@ -1,10 +1,11 @@
-import "./NavBar.css"
-import logo from "../img/logo.jpg"
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+import logo from "../img/logo.jpg";
+import "./NavBar.css";
+import CartWidget from "./CartWidget";
 
 const NavBar = ()=>{
     return (
-        <div>
+        <div className="NavBar">
             <img src={logo}  alt="logo"/>
             <h1>WS-Web</h1>
             <nav>
@@ -12,9 +13,8 @@ const NavBar = ()=>{
                 <a href="#">Resmas</a>
                 <a href="#">Perifericos</a>
             </nav>
-            <ShoppingCartIcon/>
+            <CartWidget/>
         </div>
-        
     )
 }
 
