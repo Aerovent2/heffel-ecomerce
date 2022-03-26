@@ -1,5 +1,5 @@
 
-import logo from "../img/logo.jpg";
+import logo from "../img/logo.jpg"
 import "./NavBar.css";
 import CartWidget from "./CartWidget";
 
