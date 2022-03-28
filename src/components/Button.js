@@ -1,6 +1,6 @@
 import { green, red } from "@mui/material/colors"
 
-const Button = ({color, text})=>{
+const Button = ({color, text, onClick})=>{
     const estiloButton ={
         backgroundColor : color === "red" ?  "red": color === "blue" ? "blue" : color === "green" ? "green": "gray",
         color :color === "red" ?  "black": color === "blue" ? "white" : color === "green" ? "white": "black",
@@ -9,7 +9,7 @@ const Button = ({color, text})=>{
         height: 25,
     }
     return (
-            <button  style={estiloButton}>
+            <button onClick={onClick} style={estiloButton}>
             {text}
         </button>
     )

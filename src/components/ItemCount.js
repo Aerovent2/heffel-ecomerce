@@ -36,18 +36,14 @@ const ItemCount = ({stock, initial, onAdd})=>{
 //---------Render--------------------------------------------------------------
     return (
         <div style={estiloItemCount}>
-            <h2>Item</h2>
             <div style={estiloDivCantidad}>
                 <Button onClick = {resta} text="-" color="red"/>
-                <button onClick = {resta}> - </button>
                 <p> {contador} </p>
-                <button onClick = {suma}> + </button>
                 <Button onClick = {suma} text="+" color="green"/>
             </div>
-            <button onClick = {add}>Comprar</button>
-            <Button text="Agregar al Carrito" color="blue"/>
+            <Button onClick = {add} text="Agregar al Carrito" color="blue"/>
         </div>
     )
 }
-//los botones con estilo aun no funcionan usar los grises-----------------
+
 export default ItemCount
