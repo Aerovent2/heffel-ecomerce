@@ -3,8 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import {useState, useEffect} from 'react'
 import ItemList from '../components/ItemList'
-import ItemCount from '../components/ItemCount';
-
+//import ItemCount from '../components/ItemCount';
 
 const productosIniciales = [
     {id:1, title:"Mouse Logitech M280", description:"Mouse inalambrico negro", price:1550, pictureUrl:"/img/products/mouse.webp" },
@@ -28,6 +27,7 @@ const promesa = new Promise((res,rej)=>{
 
 
 export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo por props
+    
     const estiloItemListContainer = {
         color,
         fontSize: tamanio,
@@ -47,19 +47,21 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
         })    
     },[]);
 
-    const onAdd =(contador)=>{
+   /* const onAdd =(contador)=>{
         console.log(`estas comprando ${contador} productos` )
-    }
+    }*/
     return(
         <>
         <CssBaseline />
-        <Container maxWidth="sm">
+        <Container >
             <div className="ItemListContainer">
                 <h2 style={estiloItemListContainer}>{greeting}</h2>
                 <ItemList loading={loading} productos={productos}></ItemList>
             </div>
         </Container>
-        <ItemCount initial={1} stock={10} onAdd={onAdd}></ItemCount>
+        
         </>
     )
 }
+
+//<ItemCount initial={1} stock={10} onAdd={onAdd}></ItemCount>

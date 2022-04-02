@@ -1,6 +1,4 @@
-h1{
-    color: gray;
-}
+
 img{
     height: 100px;
 }
@@ -12,21 +10,9 @@ img{
     background-color: aquamarine;
 }
 
-a{
-    text-decoration: none;
-    padding: 2px;
-    margin: 2px;
-}
 
 svg{
     margin: 10px;
 }
 
-.main{
-    height: 800px;
-}
 
-
-.ItemListContainer h2{
-    text-align: center;
-}

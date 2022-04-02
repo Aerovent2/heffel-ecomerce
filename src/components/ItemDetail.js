@@ -6,29 +6,31 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-const Item= ({item})=>{
-    
+
+const ItemDetail = ({id, imagen, titulo, descripcion, precio})=>{
     return(
-      
-            <Card  sx={{ minWidth: 175, maxWidth:215 }}>
+        <div key={id}>
+            <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {item.title}
+                        {titulo}
                     </Typography>
-                    <img src={item.pictureUrl} alt="imagen no disponible"></img>
-                    
+                    <img src={imagen} alt="imagen no disponible"></img>
+                    <Typography variant="h5" component="div">
+                        {descripcion}
+                    </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        ${item.price}
+                        ${precio}
                     </Typography>
                     </CardContent>
                 <CardActions>
                     <Button>
-                        Detalle
+                        Aca iria item count supongo
                     </Button>
                 </CardActions>
             </Card>
-        
+        </div>
     )
 }
 
-export default Item
+export default ItemDetail
