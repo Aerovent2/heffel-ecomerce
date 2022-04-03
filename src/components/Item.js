@@ -4,12 +4,15 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import {  useNavigate } from 'react-router-dom';
 
 const Item= ({item})=>{
+    const path = useNavigate()
+    const navegar = ()=>{
+        path("/producto/" + item.id)
+    }
     
     return(
-      
             <Card  sx={{ minWidth: 175, maxWidth:215 }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -22,9 +25,14 @@ const Item= ({item})=>{
                     </Typography>
                     </CardContent>
                 <CardActions>
-                    <Button>
-                        Detalle
-                    </Button>
+                    
+                        
+                        <Button onClick={navegar}>Detalle
+
+                        </Button>
+
+                        
+                    
                 </CardActions>
             </Card>
         

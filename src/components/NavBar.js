@@ -8,32 +8,26 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
-
 
 import logo from "../img/logo.jpg"
 import "./NavBar.css";
 import CartWidget from "./CartWidget";
+import { NavLink } from 'react-router-dom';
 
-const pages = ['Tintas', 'Resmas', 'Perifericos'];
+const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
+                {Name:"Resmas", Id:2, Url:"categorias/resmas"},
+                {Name:"Perifericos", Id:3, Url:"categorias/perifericos"}];
 
 
 const NavBar = ()=>{
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-   
-  
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
     };
-   
-
-  
     const handleCloseNavMenu = () => {
       setAnchorElNav(null);
     };
-  
   
     return (
       <AppBar position="static">
@@ -45,7 +39,9 @@ const NavBar = ()=>{
               component="div"
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-              <img src={logo}  alt="logo"/>
+              <NavLink to="/">
+                <img src={logo}  alt="logo"/>
+              </NavLink>
             </Typography>
   
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -77,10 +73,12 @@ const NavBar = ()=>{
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                {pages.map((page,i) => (
-                  <MenuItem key={i} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                {pages.map((page) => (
+                    <NavLink key={page.Id} to={page.Url} style= { { textDecoration: 'none' }}>
+                      <MenuItem  onClick={handleCloseNavMenu}>
+                        <Typography sx={{color:"black"}} textAlign="center">{page.Name}</Typography>
+                    </MenuItem>
+                  </NavLink>
                 ))}
               </Menu>
             </Box>
@@ -90,22 +88,24 @@ const NavBar = ()=>{
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
-              <img src={logo}  alt="logo"/>
+              <NavLink to="/">
+                <img src={logo}  alt="logo"/>
+              </NavLink>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
+                <NavLink key={page.Id} to={page.Url} style= { { textDecoration: 'none' }} >
+                  <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}
+                  >{page.Name} 
+                  </Button>
+                </NavLink>
               ))}
             </Box>
   
             <Box sx={{ flexGrow: 0 }}>
-                <CartWidget></CartWidget>
+              <NavLink to="/cart" style={{color: 'white'}}  > 
+                <CartWidget>  </CartWidget>
+              </NavLink>
             </Box>
           </Toolbar>
         </Container>
@@ -117,15 +117,3 @@ const NavBar = ()=>{
 
 export default NavBar 
 
-/*return (
-        <div className="NavBar">
-            <img src={logo}  alt="logo"/>
-            <h1>WS-Web</h1>
-            <nav>
-                <a href="#">Tintas</a>
-                <a href="#">Resmas</a>
-                <a href="#">Perifericos</a>
-            </nav>
-            <CartWidget/>
-        </div>
-    )*/

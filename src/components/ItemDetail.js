@@ -4,23 +4,24 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Container } from '@mui/material';
 
 
 
-const ItemDetail = ({id, imagen, titulo, descripcion, precio})=>{
+const ItemDetail = ({item})=>{
     return(
-        <div key={id}>
+        <Container>
             <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {titulo}
+                        {item.title}
                     </Typography>
-                    <img src={imagen} alt="imagen no disponible"></img>
+                    <img src={item.pictureUrl} alt="imagen no disponible"></img>
                     <Typography variant="h5" component="div">
-                        {descripcion}
+                        {item.description}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        ${precio}
+                        ${item.price}
                     </Typography>
                     </CardContent>
                 <CardActions>
@@ -29,7 +30,7 @@ const ItemDetail = ({id, imagen, titulo, descripcion, precio})=>{
                     </Button>
                 </CardActions>
             </Card>
-        </div>
+        </Container>
     )
 }
 
