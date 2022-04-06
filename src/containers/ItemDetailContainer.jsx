@@ -10,7 +10,7 @@ const ItemDetailContainer = ()=>{
     const [loading,setLoading]=useState(true);
 
     useEffect(()=>{
-            fetch("https://mocki.io/v1/d53ae450-6b63-453b-9640-36b3ab0b4c88")
+            fetch("https://mocki.io/v1/f012e37d-4d26-49ff-914c-1d09bc179c8b")
             .then((data)=>{
                 const dataParseada = data.json();
                 return dataParseada
@@ -32,8 +32,6 @@ const ItemDetailContainer = ()=>{
     return(
             loading ? <h2>Cargando .....</h2> 
             :<ItemDetail key={producto.id} item={producto}></ItemDetail>
-)
-    
-}
+)}
 
 export default ItemDetailContainer

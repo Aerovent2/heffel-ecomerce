@@ -1,4 +1,10 @@
-Readme modificado para el desafio 
+Ecomerce de una local de computacion- 
+la idea es que los clientes compren online  los articulos de officina que mas te dejan a pata cuando estas trabajando con opcion a envio por reparto por la tarde o bien reservar el articulo en el local para que lo pasen a  retirar(en ambos casos se descuenta del stock)
+
+
+Las librerias utilizadas son React Js y MUI
+
+
 1 la lista de productos la tomo de dos lugares diferentes pero contiene los mismos datos. 
 * en itemlistcontainer la tomo con una promesa realizada a un json local
 * en itemDetailcontainer la tomo de un fetch a una api de mocki

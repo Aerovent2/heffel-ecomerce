@@ -2,13 +2,24 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
-
-
+import { Link } from 'react-router-dom';
+import {  Button, Container } from '@mui/material';
+import ItemCount from './ItemCount';
+import { useState } from 'react';
 
 const ItemDetail = ({item})=>{
+
+    const [clicked, setClicked] = useState(false)
+    const onAdd =(contador, id)=>{
+    let itemsParaElCarrito=[contador,id]
+        
+    setClicked(true)
+        console.log(`estas comprando ${contador} productos con id ${id}` )
+        console.log(itemsParaElCarrito)
+    
+    }
+
     return(
         <Container>
             <Card sx={{ minWidth: 275 }}>
@@ -25,9 +36,9 @@ const ItemDetail = ({item})=>{
                     </Typography>
                     </CardContent>
                 <CardActions>
-                    <Button>
-                        Aca iria item count supongo
-                    </Button>
+                    {clicked ? <Link to="/cart"><Button>Ir Al Carrito</Button></Link>
+                    :<ItemCount initial={1} item={item} onAdd={onAdd}></ItemCount>}
+                
                 </CardActions>
             </Card>
         </Container>

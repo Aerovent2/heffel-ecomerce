@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import Button from "./Button"
 
-const ItemCount = ({stock, initial, onAdd})=>{
+const ItemCount = ({item, initial, onAdd})=>{
 //Estilos-------------------------------------------------------------------------    
     const estiloItemCount ={
         justifyContent: "center",
@@ -23,7 +23,7 @@ const ItemCount = ({stock, initial, onAdd})=>{
     const [contador, setContador] = useState(initial);
         
     const suma= ()=>{
-        contador < stock ? setContador( contador +1): console.log("stock max")
+        contador < item.stock ? setContador( contador +1): console.log("stock max")
     };
 
     const resta=()=>{
@@ -31,11 +31,12 @@ const ItemCount = ({stock, initial, onAdd})=>{
     };
 
     const add = ()=>{
-        onAdd(contador)
+        onAdd(contador, item.id)
     }
 //---------Render--------------------------------------------------------------
     return (
         <div style={estiloItemCount}>
+            <h2>Unidades Disponibles {item.stock} </h2>
             <div style={estiloDivCantidad}>
                 <Button onClick = {resta} text="-" color="red"/>
                 <p> {contador} </p>

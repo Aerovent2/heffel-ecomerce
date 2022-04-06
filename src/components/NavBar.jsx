@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-
 import logo from "../img/logo.jpg"
 import "./NavBar.css";
 import CartWidget from "./CartWidget";
 import { NavLink } from 'react-router-dom';
+
 
 const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
                 {Name:"Resmas", Id:2, Url:"categorias/resmas"},
