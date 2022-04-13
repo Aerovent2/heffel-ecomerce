@@ -31,7 +31,7 @@ const ItemCount = ({item, initial, onAdd})=>{
     };
 
     const add = ()=>{
-        onAdd(contador, item.id)
+        onAdd(contador)
     }
 //---------Render--------------------------------------------------------------
     return (

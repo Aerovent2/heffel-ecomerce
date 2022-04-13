@@ -25,14 +25,7 @@ const Item= ({item})=>{
                     </Typography>
                     </CardContent>
                 <CardActions>
-                    
-                        
-                        <Button onClick={navegar}>Detalle
-
-                        </Button>
-
-                        
-                    
+                        <Button onClick={navegar}>Detalle</Button>
                 </CardActions>
             </Card>
         

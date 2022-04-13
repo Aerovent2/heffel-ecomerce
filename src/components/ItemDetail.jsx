@@ -6,22 +6,23 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import {  Button, Container } from '@mui/material';
 import ItemCount from './ItemCount';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { contexto } from '../context/CartContext';
+
 
 const ItemDetail = ({item})=>{
 
+    const {agregarItem,} =useContext(contexto)
     const [clicked, setClicked] = useState(false)
-    const onAdd =(contador, id)=>{
-    let itemsParaElCarrito=[contador,id]
-        
-    setClicked(true)
-        console.log(`estas comprando ${contador} productos con id ${id}` )
-        console.log(itemsParaElCarrito)
-    
-    }
 
+    const onAdd =(contador)=>{
+                agregarItem({cantidad:contador,id:item.id,item:item.title, precio:item.price})
+                setClicked(true)
+    } 
+    
     return(
         <Container>
+            
             <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -38,7 +39,6 @@ const ItemDetail = ({item})=>{
                 <CardActions>
                     {clicked ? <Link to="/cart"><Button>Ir Al Carrito</Button></Link>
                     :<ItemCount initial={1} item={item} onAdd={onAdd}></ItemCount>}
-                
                 </CardActions>
             </Card>
         </Container>
