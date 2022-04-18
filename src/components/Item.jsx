@@ -14,7 +14,7 @@ const Item= ({item})=>{
     
     return(
             <Card  sx={{ minWidth: 175, maxWidth:215 }}>
-                <CardContent>
+                <CardContent onClick={navegar}>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {item.title}
                     </Typography>
@@ -23,7 +23,7 @@ const Item= ({item})=>{
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         ${item.price}
                     </Typography>
-                    </CardContent>
+                </CardContent>
                 <CardActions>
                         <Button onClick={navegar}>Detalle</Button>
                 </CardActions>

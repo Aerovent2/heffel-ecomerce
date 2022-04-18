@@ -6,6 +6,7 @@ const Button = ({color, text, onClick})=>{
         color :color === "red" ?  "black": color === "blue" ? "white" : color === "green" ? "white": "black",
         borderRadius: 5,
         fontSize: 15,
+        
         height: 25,
     }
     return (

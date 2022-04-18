@@ -1,22 +1,9 @@
+import { Box } from "@mui/material";
 import React, {useState} from "react"
 import Button from "./Button"
 
 const ItemCount = ({item, initial, onAdd})=>{
-//Estilos-------------------------------------------------------------------------    
-    const estiloItemCount ={
-        justifyContent: "center",
-        alignItems: "center",
-        border: "solid", 
-        width: 200,
-        borderRadius: 20
-    }
-    const estiloDivCantidad ={
-        display : "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        border: "solid", 
-        borderRadius: 10
-    }
+
 
 //Funciones ------------------------------------------------------------------------
 
@@ -35,15 +22,17 @@ const ItemCount = ({item, initial, onAdd})=>{
     }
 //---------Render--------------------------------------------------------------
     return (
-        <div style={estiloItemCount}>
+        <Box >
             <h2>Unidades Disponibles {item.stock} </h2>
-            <div style={estiloDivCantidad}>
+            <Box sx={{display: 'flex',alignItems: 'center',  justifyContent: 'space-around'}}>
                 <Button onClick = {resta} text="-" color="red"/>
                 <p> {contador} </p>
                 <Button onClick = {suma} text="+" color="green"/>
-            </div>
-            <Button onClick = {add} text="Agregar al Carrito" color="blue"/>
-        </div>
+            </Box>
+            <Box sx={{display: 'flex',alignItems: 'center',  justifyContent: 'space-around'}}>
+                <Button onClick = {add} text="Agregar al Carrito" color="blue"/>
+            </Box>
+        </Box>
     )
 }
 

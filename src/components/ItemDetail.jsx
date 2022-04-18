@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+import { Box } from '@mui/system'
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ const ItemDetail = ({item})=>{
     return(
         <Container>
             
-            <Card sx={{ minWidth: 275 }}>
+            <Box sx={{ p: 2, display: 'flex',alignItems: 'center',  justifyContent: 'space-around',boxShadow: 3  }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {item.title}
@@ -35,12 +35,13 @@ const ItemDetail = ({item})=>{
                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         ${item.price}
                     </Typography>
-                    </CardContent>
-                <CardActions>
-                    {clicked ? <Link to="/cart"><Button>Ir Al Carrito</Button></Link>
+                </CardContent>
+                <Box>
+                    {clicked ? <Link to="/cart" style= { { textDecoration: 'none' }} ><Button>Ir Al Carrito</Button></Link>
                     :<ItemCount initial={1} item={item} onAdd={onAdd}></ItemCount>}
-                </CardActions>
-            </Card>
+                </Box>
+            </Box>
+            
         </Container>
     )
 }
