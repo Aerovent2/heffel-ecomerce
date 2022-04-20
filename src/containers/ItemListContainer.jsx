@@ -4,21 +4,8 @@ import Container from '@mui/material/Container';
 import {useState, useEffect} from 'react'
 import ItemList from '../components/ItemList'
 import { useParams } from 'react-router-dom';
-import productos from "../db/productos.json"
-
-
-
-const productosIniciales = productos
-
-
-const promesa = new Promise((res,rej)=>{
-    setTimeout(() => {
-        res(productosIniciales)
-    }, 2000);
-    
-});
-
-
+import { db } from '../db/firebase';
+import {getDocs,collection,query,where} from "firebase/firestore"
 
 
 export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo por props
@@ -33,24 +20,36 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
     const [loading,setLoading]=useState(true);
     
     useEffect(()=>{
-        promesa.then((productos)=>{
-            if (id){
-                const productosFiltrados = productos.filter(producto => producto.category === id)
-                setProductos(productosFiltrados)
-                const idTitulo = id.toUpperCase()
-                setTitulo(idTitulo)
-            }
-            else{
-                setProductos(productos)
+
+        const coleccionProductos = collection(db,"productos");
+        let consulta
+        if(id){
+                consulta = query(coleccionProductos, where("category", "==",id))
+                setTitulo(id.toUpperCase())
+        }   
+        else {  
+                consulta = coleccionProductos;
                 setTitulo("Bienvenido")
-            }
-            
-            
+        }
+
+        
+        getDocs(consulta)
+        .then((result)=>{
+            const docs =   result.docs
+            const lista = docs.map(producto =>{
+                const id = producto.id
+                const product = {
+                    id,...producto.data()
+                }
+                return product
+                })
+            setProductos(lista)
             setLoading(false)
         })
         .catch(()=>{
             console.log("algo salio mal")
-        })    
+        })  
+
     },[id]);
 
 

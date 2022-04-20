@@ -25,7 +25,7 @@ const CustomProvider = ({children})=>{
     };
 
     const quitarItem =(idCarrito)=>{
-        let actualizado =itemsCarrito.filter((item) => item.id !== Number(idCarrito) )
+        let actualizado =itemsCarrito.filter((item) => item.id !== idCarrito )
         setItemsCarrito(actualizado)
     };
 

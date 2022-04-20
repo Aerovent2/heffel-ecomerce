@@ -10,6 +10,7 @@ const Cart = ()=>{
     }
     const quita=(e)=>{
         quitarItem(e.target.id)
+        console.log(e.target.id)
         }
 
 
