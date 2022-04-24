@@ -7,6 +7,7 @@ import { contexto } from '../context/CartContext';
 export const CartContainer = () => {
     const {sumaCarrito} =useContext(contexto)
 
-    return (sumaCarrito.cantidad  > 0 ? <Cart></Cart>: <EmptyCart></EmptyCart>
+    return (sumaCarrito.cantidad  > 0 ? <Cart></Cart>
+    : <EmptyCart></EmptyCart>
     )
 }

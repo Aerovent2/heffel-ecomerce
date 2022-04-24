@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { Box } from '@mui/system'
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -39,6 +38,7 @@ const ItemDetail = ({item})=>{
                 <Box>
                     {clicked ? <Link to="/cart" style= { { textDecoration: 'none' }} ><Button>Ir Al Carrito</Button></Link>
                     :<ItemCount initial={1} item={item} onAdd={onAdd}></ItemCount>}
+                    <Link to="/" style= { { textDecoration: 'none' }} ><Button>Seguir Comprando</Button></Link>
                 </Box>
             </Box>
             

@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CustomProvider from "./context/CartContext";
 import { CartContainer } from "./containers/CartContainer";
+import Login from ".//components/Login"
 
 const App = ()=>{
   return(
@@ -17,6 +18,7 @@ const App = ()=>{
           <Route path="/categorias/:id" element={<ItemListContainer color="red" tamanio={48} greeting="categoria"/>}/>
           <Route path="/producto/:id" element={<ItemDetailContainer></ItemDetailContainer>}/>
           <Route path="/cart" element={<CartContainer></CartContainer>}/>
+          <Route path="/login" element={<Login></Login>}/>
           <Route path="*" element={<NotFound></NotFound>}/>
         </Routes>
       </CustomProvider>
