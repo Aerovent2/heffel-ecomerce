@@ -1,38 +1,32 @@
-import { Box } from "@mui/material";
+import { Button  } from "@mui/material";
 import React, {useState} from "react"
-import Button from "./Button"
+import "./ItemCount.css";
+
+
 
 const ItemCount = ({item, initial, onAdd})=>{
-
-
-//Funciones ------------------------------------------------------------------------
-
     const [contador, setContador] = useState(initial);
-        
     const suma= ()=>{
-        contador < item.stock ? setContador( contador +1): console.log("stock max")
+        contador < item.stock && setContador( contador +1)
     };
-
     const resta=()=>{
-        contador > 1 ? setContador( contador -1): console.log("stock min")
+        contador > 1 && setContador( contador -1)
     };
-
     const add = ()=>{
         onAdd(contador)
     }
-//---------Render--------------------------------------------------------------
+
     return (
-        <Box >
-            <h2>Unidades Disponibles {item.stock} </h2>
-            <Box sx={{display: 'flex',alignItems: 'center',  justifyContent: 'space-around'}}>
-                <Button onClick = {resta} text="-" color="red"/>
+        <div>
+            <div className="botoncillos">
+                <Button variant="outlined" onClick={resta}>-</Button>
                 <p> {contador} </p>
-                <Button onClick = {suma} text="+" color="green"/>
-            </Box>
-            <Box sx={{display: 'flex',alignItems: 'center',  justifyContent: 'space-around'}}>
-                <Button onClick = {add} text="Agregar al Carrito" color="blue"/>
-            </Box>
-        </Box>
+                <Button variant="outlined" onClick={suma}>+</Button>
+            </div>
+            <div >
+                <Button variant="outlined" color="success" onClick={add}>agregar al carrito</Button>
+            </div>
+        </div>
     )
 }
 

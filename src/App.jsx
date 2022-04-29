@@ -15,7 +15,7 @@ const App = ()=>{
         <NavBar/>
         <Routes>
           <Route path="/" element={<ItemListContainer color="aquamarine" tamanio={48} greeting="Bienvenido"/>}/>
-          <Route path="/categorias/:id" element={<ItemListContainer color="red" tamanio={48} greeting="categoria"/>}/>
+          <Route path="/categorias/:id" element={<ItemListContainer color="lightblue" tamanio={35} greeting="categoria"/>}/>
           <Route path="/producto/:id" element={<ItemDetailContainer></ItemDetailContainer>}/>
           <Route path="/cart" element={<CartContainer></CartContainer>}/>
           <Route path="/login" element={<Login></Login>}/>

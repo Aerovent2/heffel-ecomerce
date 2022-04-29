@@ -1,13 +1,10 @@
-import React, {useState,useContext} from 'react';
+import React, {useContext} from 'react';
 import { contexto } from '../context/CartContext';
 import {  Button, Container } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 
-
-
 const Login = () => {
-
     const {datosComprador} =useContext(contexto)
     const estiloError={
         color: "#e92b2d",
@@ -41,7 +38,7 @@ const Login = () => {
 					}
 
                     if(!valores.direccion){
-						errores.direccion = 'Por favor ingresa una d'
+						errores.direccion = 'Por favor ingresa una direccion'
 					} else if(/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.direccion)){
 						errores.direccion = 'La direccion debe contener calle y altura'
 					}
@@ -60,10 +57,8 @@ const Login = () => {
 
 					return errores;
 				}}
-				onSubmit={(valores, {resetForm}) => {
+				onSubmit={(valores) => {
                     datosComprador(valores)
-                
-                    
 				}}
 			>
 				{( {errors} ) => (
@@ -108,17 +103,12 @@ const Login = () => {
 							/>
 							<ErrorMessage name="telefono" component={() => (<div style={estiloError}>{errors.telefono}</div>)} />
 						</div>
-
-
 						<Button type="submit" style={estiloDiv}>Continuar</Button>
-						
 					</Form>
 				)}
 			</Formik>
 		</Container>
 	);
 }
- 
-
 
 export default Login

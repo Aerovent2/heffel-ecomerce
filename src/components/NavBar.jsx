@@ -13,7 +13,8 @@ import logo from "../img/logo.jpg"
 import "./NavBar.css";
 import CartWidget from "./CartWidget";
 import { NavLink } from 'react-router-dom';
-
+import {useContext} from 'react';
+import { contexto } from '../context/CartContext';
 
 const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
                 {Name:"Resmas", Id:2, Url:"categorias/resmas"},
@@ -21,6 +22,10 @@ const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
 
 
 const NavBar = ()=>{
+
+const {datosIngresados,comprador} =useContext(contexto)
+
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -103,9 +108,10 @@ const NavBar = ()=>{
             </Box>
   
             <Box sx={{ flexGrow: 0 }}>
-            <NavLink to="/login" style={{color: 'white'}}  > 
-                Ingreso
-              </NavLink>
+            
+            {datosIngresados? <h4>Hola {comprador.nombre}</h4>
+            :<NavLink to="/login" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Ingresar</NavLink>}
+              
               <NavLink to="/cart" style={{color: 'white'}}  > 
                 <CartWidget>  </CartWidget>
               </NavLink>

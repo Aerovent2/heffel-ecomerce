@@ -1,0 +1,24 @@
+.container{
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+}
+.card {
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin:auto;
+    flex-direction: row;
+}
+.cardCont{
+    padding: 5px;
+    flex-wrap: wrap;
+}
+.itemCount{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+
+}

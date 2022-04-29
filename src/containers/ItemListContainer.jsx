@@ -1,8 +1,7 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import {useState, useEffect,useContext} from 'react'
-import { contexto } from '../context/CartContext';
+import {useState, useEffect} from 'react'
 import ItemList from '../components/ItemList'
 import { useParams } from 'react-router-dom';
 import { db } from '../db/firebase';
@@ -11,7 +10,6 @@ import {getDocs,collection,query,where} from "firebase/firestore"
 
 export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo por props
     const {id} = useParams()
-    const {comprador,datosIngresados} =useContext(contexto)
     const estiloItemListContainer = {
         color,
         fontSize: tamanio,
@@ -29,10 +27,9 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
                 setTitulo(id.toUpperCase())
         }   
         else {  
-                consulta = coleccionProductos;
-                if(datosIngresados){
-            setTitulo(`Bienvenido ${comprador.nombre}`)
-        }
+            consulta = coleccionProductos;
+            setTitulo("Bienvenido")
+        
         }
         getDocs(consulta)
         .then((result)=>{

@@ -11,6 +11,8 @@ import { contexto } from '../context/CartContext';
 const CartWidget = ()=>{
     const {sumaCarrito} =useContext(contexto)
 
+
+
     const StyledBadge = styled(Badge)(({ theme }) => ({
         '& .MuiBadge-badge': {
             right: -3,
