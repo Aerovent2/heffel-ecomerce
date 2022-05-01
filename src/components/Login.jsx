@@ -58,7 +58,7 @@ const Login = () => {
 					return errores;
 				}}
 				onSubmit={(valores) => {
-                    datosComprador(valores)
+					datosComprador(valores)
 				}}
 			>
 				{( {errors} ) => (

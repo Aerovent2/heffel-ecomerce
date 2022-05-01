@@ -15,6 +15,7 @@ import CartWidget from "./CartWidget";
 import { NavLink } from 'react-router-dom';
 import {useContext} from 'react';
 import { contexto } from '../context/CartContext';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
                 {Name:"Resmas", Id:2, Url:"categorias/resmas"},
@@ -23,7 +24,7 @@ const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
 
 const NavBar = ()=>{
 
-const {datosIngresados,comprador} =useContext(contexto)
+const {datosIngresados,comprador,administrador,admin} =useContext(contexto)
 
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -45,7 +46,7 @@ const {datosIngresados,comprador} =useContext(contexto)
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
               <NavLink to="/">
-                <img src={logo}  alt="logo"/>
+                <img src={logo}  onDoubleClick={administrador} alt="logo"/>
               </NavLink>
             </Typography>
   
@@ -94,7 +95,7 @@ const {datosIngresados,comprador} =useContext(contexto)
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
               <NavLink to="/">
-                <img src={logo}  alt="logo"/>
+                <img src={logo} onDoubleClick={administrador} alt="logo"/>
               </NavLink>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -108,14 +109,16 @@ const {datosIngresados,comprador} =useContext(contexto)
             </Box>
   
             <Box sx={{ flexGrow: 0 }}>
-            
+            {admin && <NavLink to="/nuevo" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  <AddBoxIcon></AddBoxIcon> </NavLink>}
             {datosIngresados? <h4>Hola {comprador.nombre}</h4>
             :<NavLink to="/login" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Ingresar</NavLink>}
               
               <NavLink to="/cart" style={{color: 'white'}}  > 
                 <CartWidget>  </CartWidget>
+                
               </NavLink>
             </Box>
+            
           </Toolbar>
         </Container>
       </AppBar>

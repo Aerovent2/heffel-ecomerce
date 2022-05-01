@@ -12,9 +12,12 @@ const CustomProvider = ({children})=>{
     const [datosIngresados, setDatosIngresados] = useState(false)
     const [idCompra, setIdCompra] = useState("")
     const [comprador, setComprador] = useState("")
+    const [admin, setAdmin] = useState(false)    
 
+    const administrador = ()=>{
+        setAdmin(true)
+    }
     
-
     const datosComprador =(valores)=>{
                 
         setComprador({
@@ -105,7 +108,10 @@ const CustomProvider = ({children})=>{
         datosIngresados,
         comprador,
         datosComprador,
-        idCompra}
+        idCompra,
+        administrador,
+        admin
+        }
     
     return (<Provider value={values} >
         {children}

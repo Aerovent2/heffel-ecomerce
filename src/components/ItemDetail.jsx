@@ -5,11 +5,12 @@ import ItemCount from './ItemCount';
 import { useState, useContext } from 'react';
 import { contexto } from '../context/CartContext';
 import "./ItemDetail.css";
+import ModificaProductos from './ModificaProductos';
 
 
 const ItemDetail = ({item})=>{
 
-    const {agregarItem,} =useContext(contexto)
+    const {agregarItem,admin} =useContext(contexto)
     const [clicked, setClicked] = useState(false)
 
     const onAdd =(contador)=>{
@@ -17,13 +18,15 @@ const ItemDetail = ({item})=>{
                 setClicked(true)
     } 
 
+
     return(
         <div className='container' >
-            <Link to="/" style= { { textDecoration: 'none' }} ><Button>Seguir Comprando</Button></Link>
+            <Link to="/" style= { { textDecoration: 'none' }} ><Button>Volver</Button></Link>
+            
             <div className='card'>
                 <div className='cardCont'>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                        {item.title}
+                        {item.title} 
                     </Typography>
                         <img src={item.pictureUrl} alt="imagen no disponible"></img>
                     <Typography variant="h5" component="div">
@@ -37,14 +40,13 @@ const ItemDetail = ({item})=>{
                     </Typography>
                         
                 </div>
-                <div className='itemCount'>
+                {!admin && <div className='itemCount'>
                     {clicked ? <Link to="/cart" style= { { textDecoration: 'none' }} ><Button>Ir Al Carrito</Button></Link>
                     :<ItemCount initial={1} item={item} onAdd={onAdd}></ItemCount>}
-                    
-                </div>
+                </div>}
+
             </div>
-            
-            
+            {admin && <ModificaProductos item={item}></ModificaProductos>}
         </div>
     )
 }

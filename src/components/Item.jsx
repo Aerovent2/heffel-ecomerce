@@ -1,16 +1,22 @@
 import * as React from 'react';
+import {useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {  useNavigate } from 'react-router-dom';
+import { contexto } from '../context/CartContext';
 
 const Item= ({item})=>{
+    const {admin} =useContext(contexto)
     const path = useNavigate()
     const navegar = ()=>{
         path("/producto/" + item.id)
     }
+
+
+    
     
     return(
             <Card  sx={{ minWidth: 175, maxWidth:215 }}>
@@ -25,7 +31,8 @@ const Item= ({item})=>{
                     </Typography>
                 </CardContent>
                 <CardActions>
-                        <Button onClick={navegar}>Detalle</Button>
+                    
+                    {admin ? <Button color="warning" onClick={navegar}>Editar</Button>:<Button onClick={navegar}>Ver</Button>} 
                 </CardActions>
             </Card>
         

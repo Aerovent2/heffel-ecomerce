@@ -1,13 +1,13 @@
 import React from 'react'
-import { addDoc, collection } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { app,db} from '../db/firebase';
+import { doc, updateDoc,deleteDoc } from 'firebase/firestore';
+import { getStorage, ref ,deleteObject} from "firebase/storage";
+import {db,app} from '../db/firebase';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {  Button, Container } from '@mui/material';
 
 
 
-function CargarProductos() {
+function ModificaProductos({item}) {
 
     const estiloError={
         color: "#e92b2d",
@@ -22,44 +22,40 @@ function CargarProductos() {
     }
 
     const submitHandler =  (valores)=>{
-        const archivo = valores.file;
-        const storage = getStorage(app);
-        const storageRef = ref(storage, `img/products/${archivo.name}`);
-
-        uploadBytes(storageRef, archivo).then((snapshot) => {
-            const link = getDownloadURL(storageRef)
-            link.then((url)=>{
-                let urlImagen = url;
-                const nuevoCollection = collection(db, "productos");
-                addDoc(nuevoCollection,{title:valores.title,
-                                pictureUrl:urlImagen,
+		const modifDoc= doc(db,"productos",item.id)
+                updateDoc(modifDoc,{title:valores.title,
                                 category:valores.category,
                                 price:valores.price,
                                 description:valores.desc,
-								name:archivo.name,
-                                stock:valores.stock,})
+                                stock:valores.stock})
                     .then(result =>{
-                        console.log(`producto cargado con exito`, result.id)
+                        console.log(`producto actualizado con exito`)
 						window.history.back()
                     }) 
-            })
-        })
-
     }
 
-
+	const eliminar = ()=>{
+		const storage = getStorage(app);
+        const storageRef = ref(storage, `img/products/${item.name}`);
+		deleteDoc(doc(db,"productos",item.id)).then(()=>{
+			console.log("item borrado")
+			deleteObject(storageRef).then(() => {
+				console.log("imagen borrada")
+				window.history.back()
+				})
+		})
+	} 
     return (
     
         <Container>
-			<h1>Cargar Nuevo Producto</h1>
 			<Formik
 				initialValues={{
-					title: '',
-					desc: '',
-                    stock:'',
-                    category:'',
-                    price:'',
-                    file:''
+					title:item.title,
+					desc: item.description,
+                    stock:item.stock,
+                    category:item.category,
+                    price:item.price,
+                    
 				}}
 				validate={(valores) => {
 					let errores = {};
@@ -88,10 +84,6 @@ function CargarProductos() {
 					} else if(/^[09][0-9]{1,7}$/.test(valores.stock)){
 						errores.stock = 'El stock  debe ser solo numeros'
 					}
-                    if(!valores.file){
-						errores.file = 'Por favor ingresa una imagen'
-					} 
-
 					return errores;
 				}} 
 				onSubmit={(valores) => {
@@ -102,71 +94,67 @@ function CargarProductos() {
 				{( {errors, setFieldValue} ) => (
 					<Form className="formulario">
 						<div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Titulo</label>
+							<label htmlFor="title"style={estiloLabel}>Nuevo Titulo</label>
 							<Field
 								type="text" 
 								id="title" 
 								name="title" 
-								placeholder="producto"
+								placeholder="title"
+								
 							/>
 							<ErrorMessage name="title" component={() => (<div style={estiloError}>{errors.title}</div>)} />
 						</div>
 
                         <div style={estiloDiv}>
-							<label htmlFor="desc"style={estiloLabel}>Descripcion</label>
+							<label htmlFor="desc"style={estiloLabel}>Nueva Descripcion</label>
 							<Field
 								type="text" 
 								id="desc" 
 								name="desc" 
 								placeholder="descripcion"
+								
 							/>
 							<ErrorMessage name="desc" component={() => (<div style={estiloError}>{errors.desc}</div>)} />
 						</div>
 
 
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Categoria</label>
+							<label htmlFor="title"style={estiloLabel}>Nueva Categoria</label>
 							<Field
 								type="text" 
 								id="category" 
 								name="category" 
 								placeholder="tintas,resmas,perifericos"
+								
 							/>
 							<ErrorMessage name="category" component={() => (<div style={estiloError}>{errors.category}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Stock</label>
+							<label htmlFor="title"style={estiloLabel}>Nuevo Stock</label>
 							<Field
 								type="number" 
 								id="stock" 
 								name="stock" 
 								placeholder="stock"
+								
 							/>
 							<ErrorMessage name="stock" component={() => (<div style={estiloError}>{errors.stock}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Precio</label>
+							<label htmlFor="title"style={estiloLabel}>Nuevo Precio</label>
 							<Field
 								type="number" 
 								id="price" 
 								name="price" 
 								placeholder="precio"
+								
 							/>
 							<ErrorMessage name="price" component={() => (<div style={estiloError}>{errors.price}</div>)} />
 						</div>
-                        <div style={estiloDiv}>
-							<label htmlFor="file"style={estiloLabel}>Imagen</label>
-							<input
-								type="file" 
-								onChange={(e)=>{
-                                    setFieldValue("file",e.target.files[0])
 
-                                }}
-							/>
-							<ErrorMessage name="file" component={() => (<div style={estiloError}>{errors.file}</div>)} />
-						</div>
 
-						<Button variant="contained"type="submit" style={estiloDiv}>Cargar</Button>
+						<Button sx={{m:3}} variant="contained" type="submit" style={estiloDiv}>Cargar</Button>
+						<Button sx={{m:3}} variant="contained"color="error" style={estiloDiv} onClick={eliminar}>Eliminar</Button>
 					</Form>
 				)}
 			</Formik>
@@ -174,4 +162,4 @@ function CargarProductos() {
     )
 }
 
-export default CargarProductos
+export default ModificaProductos
