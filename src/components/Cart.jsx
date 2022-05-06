@@ -7,13 +7,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {  useNavigate } from 'react-router-dom';
-import Login from './Login';
+import LoginContainer from '../containers/LoginContainer';
 
 
 
 
 const Cart = ()=>{
-    const {itemsCarrito,sumaCarrito,borrarCarrito,quitarItem,finalizarCompra,idCompra,datosIngresados} =useContext(contexto)
+    const {itemsCarrito,sumaCarrito,borrarCarrito,quitarItem,finalizarCompra,idCompra,idComprador} =useContext(contexto)
     
     const [open, setOpen] = useState(false);
 
@@ -66,7 +66,7 @@ const finalizarCompraHandler =()=>{
             }
             <h2>Agregaste {sumaCarrito.cantidad} items al carrito por un total de <span>${sumaCarrito.precio}</span></h2>
             <Button  variant="outlined" color="error" onClick={vacia} >vaciar carrito</Button>
-            {!datosIngresados? <Login></Login>
+            {!idComprador? <LoginContainer/>
             :<Button sx={{m:3}} variant="contained"color="success" onClick={finalizarCompraHandler}>Finalizar Compra</Button>}
 
                                 <Dialog

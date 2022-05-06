@@ -24,7 +24,7 @@ const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
 
 const NavBar = ()=>{
 
-const {datosIngresados,comprador,administrador,admin} =useContext(contexto)
+const {idComprador,admin} =useContext(contexto)
 
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -46,7 +46,7 @@ const {datosIngresados,comprador,administrador,admin} =useContext(contexto)
               sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
               <NavLink to="/">
-                <img src={logo}  onDoubleClick={administrador} alt="logo"/>
+                <img src={logo}  alt="logo"/>
               </NavLink>
             </Typography>
   
@@ -95,7 +95,7 @@ const {datosIngresados,comprador,administrador,admin} =useContext(contexto)
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
               <NavLink to="/">
-                <img src={logo} onDoubleClick={administrador} alt="logo"/>
+                <img src={logo} alt="logo"/>
               </NavLink>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -110,7 +110,7 @@ const {datosIngresados,comprador,administrador,admin} =useContext(contexto)
   
             <Box sx={{ flexGrow: 0 }}>
             {admin && <NavLink to="/nuevo" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  <AddBoxIcon></AddBoxIcon> </NavLink>}
-            {datosIngresados? <h4>Hola {comprador.nombre}</h4>
+            {idComprador? <h4>Salir</h4>
             :<NavLink to="/login" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Ingresar</NavLink>}
               
               <NavLink to="/cart" style={{color: 'white'}}  > 

@@ -81,12 +81,16 @@ function CargarProductos() {
 						errores.price = 'Por favor ingresa el precio'
 					} else if(/^[09][0-9]{1,7}$/.test(valores.price)){
 						errores.price = 'El precio  debe ser solo numeros'
+					}else if(valores.price <= 0){
+						errores.price = 'Ingresa un precio valido'
 					}
 
                     if(!valores.stock){
 						errores.stock = 'Por favor ingresa el stock'
 					} else if(/^[09][0-9]{1,7}$/.test(valores.stock)){
 						errores.stock = 'El stock  debe ser solo numeros'
+					}else if(valores.stock <= 0){
+						errores.stock = 'Ingresa un stock valido'
 					}
                     if(!valores.file){
 						errores.file = 'Por favor ingresa una imagen'

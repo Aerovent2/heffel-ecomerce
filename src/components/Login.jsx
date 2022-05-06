@@ -1,12 +1,14 @@
 import React, {useContext} from 'react';
-import { contexto } from '../context/CartContext';
 import {  Button, Container } from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from '../db/firebase';
+import { contexto } from '../context/CartContext';
 
 
 const Login = () => {
-    const {datosComprador} =useContext(contexto)
-    const estiloError={
+	const {userId} =useContext(contexto)
+	const estiloError={
         color: "#e92b2d",
         fontWeight: "600",
         fontSize: "12px"
@@ -18,97 +20,83 @@ const Login = () => {
         paddingRight:"5px"
     }
 
+	const ingresar =(valores)=>{
+		console.log("ingresar")
+		const auth = getAuth(app);
+		signInWithEmailAndPassword(auth, valores.email, valores.pass)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				userId(user.uid)
+				
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode,errorMessage)
+			}); 
+}
+
 
     return (
 		<Container>
 			<Formik
 				initialValues={{
-					nombre: '',
-					correo: '',
-                    direccion:'',
-                    telefono:''
+					email: '',
+					pass:''
 				}}
 				validate={(valores) => {
 					let errores = {};
 
-					if(!valores.nombre){
-						errores.nombre = 'Por favor ingresa un nombre'
-					} else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.nombre)){
-						errores.nombre = 'El nombre solo puede contener letras y espacios'
+					if(!valores.email.trim()){
+						errores.email = 'Por favor ingresa un correo electronico'
+					} else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.email)){
+						errores.email = 'El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.'
 					}
-
-                    if(!valores.direccion){
-						errores.direccion = 'Por favor ingresa una direccion'
-					} else if(/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(valores.direccion)){
-						errores.direccion = 'La direccion debe contener calle y altura'
-					}
-
-					if(!valores.correo){
-						errores.correo = 'Por favor ingresa un correo electronico'
-					} else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(valores.correo)){
-						errores.correo = 'El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.'
-					}
-
-                    if(!valores.telefono){
-						errores.telefono = 'Por favor ingresa un numero telefonico'
-					} else if(/^[09][0-9]{1,7}$/.test(valores.telefono)){
-						errores.telefono = 'El numero teltefonico debe ser solo numeros'
+					if(!valores.pass){
+						errores.pass = 'Por favor ingresa una contraseña'
+					} else if(valores.pass < 6){
+						errores.pass = 'la contraseña debe ser de 6 digitos o mas'
 					}
 
 					return errores;
 				}}
 				onSubmit={(valores) => {
-					datosComprador(valores)
+					ingresar(valores) 
+					
 				}}
 			>
 				{( {errors} ) => (
 					<Form className="formulario">
 						<div style={estiloDiv}>
-							<label htmlFor="nombre"style={estiloLabel}>Nombre</label>
+							<label htmlFor="email" style={estiloLabel}>Correo</label>
 							<Field
 								type="text" 
-								id="nombre" 
-								name="nombre" 
-								placeholder="Juan Perez"
-							/>
-							<ErrorMessage name="nombre" component={() => (<div style={estiloError}>{errors.nombre}</div>)} />
-						</div>
-                        <div style={estiloDiv}>
-							<label htmlFor="nombre" style={estiloLabel}>Direccion</label>
-							<Field
-								type="text" 
-								id="direccion" 
-								name="direccion" 
-								placeholder="Av Siempreviva 742"
-							/>
-							<ErrorMessage name="direccion" component={() => (<div style={estiloError}>{errors.direccion}</div>)} />
-						</div>
-						<div style={estiloDiv}>
-							<label htmlFor="correo" style={estiloLabel}>Correo</label>
-							<Field
-								type="text" 
-								id="correo" 
-								name="correo" 
+								id="email" 
+								name="email" 
 								placeholder="correo@correo.com" 
 							/>
-							<ErrorMessage name="correo" component={() => (<div style={estiloError}>{errors.correo}</div>)} />
+							<ErrorMessage name="email" component={() => (<div style={estiloError}>{errors.email}</div>)} />
 						</div>
-                        <div style={estiloDiv}> 
-							<label htmlFor="telefono" style={estiloLabel}>Telefono</label>
+						<div style={estiloDiv}> 
+							<label htmlFor="pass" style={estiloLabel}>Contraseña</label>
 							<Field
-								type="number" 
-								id="telefono    " 
-								name="telefono" 
-								placeholder="3435421354" 
+								type="password" 
+								id="pass" 
+								name="pass" 
+								
 							/>
-							<ErrorMessage name="telefono" component={() => (<div style={estiloError}>{errors.telefono}</div>)} />
+							<ErrorMessage name="pass" component={() => (<div style={estiloError}>{errors.pass}</div>)} />
 						</div>
-						<Button type="submit" style={estiloDiv}>Continuar</Button>
+						<Button type="submit" variant="contained" style={estiloDiv}>ingresar</Button>
 					</Form>
 				)}
 			</Formik>
+
+			
+			
 		</Container>
 	);
 }
 
 export default Login
+

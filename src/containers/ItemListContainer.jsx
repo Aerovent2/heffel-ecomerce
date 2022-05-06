@@ -1,11 +1,12 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import ItemList from '../components/ItemList'
 import { useParams } from 'react-router-dom';
 import { db } from '../db/firebase';
 import {getDocs,collection,query,where} from "firebase/firestore"
+import { contexto } from '../context/CartContext';
 
 
 export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo por props
@@ -14,6 +15,7 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
         color,
         fontSize: tamanio,
     }
+    const {admin} =useContext(contexto)
     const [titulo, setTitulo]=useState(greeting)
     const [productos,setProductos]=useState([]);
     const [loading,setLoading]=useState(true);
@@ -42,18 +44,24 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
                 }
                 return product
                 })
-                setProductos(lista)
+                if (admin){
+                    setProductos(lista)
+                }else{
+                    let listaConStock = lista.filter((item) => item.stock > 0 )
+                    setProductos(listaConStock)
+                }
+                setConsultaVacia(false)
                 setLoading(false)
             }
             else{
                 setConsultaVacia(true)
-                setTitulo("2")
+                setTitulo("Ups...")
             }
         })
         .catch(()=>{
             console.log("algo salio mal")
         })  
-    },[id]);
+    },[id,admin]);
 
 
     return(

@@ -9,24 +9,16 @@ const {Provider} = contexto;
 const CustomProvider = ({children})=>{
     const [itemsCarrito,setItemsCarrito] =useState([])
     const [sumaCarrito,setSumaCarrito] =useState(0)
-    const [datosIngresados, setDatosIngresados] = useState(false)
-    const [idCompra, setIdCompra] = useState("")
-    const [comprador, setComprador] = useState("")
-    const [admin, setAdmin] = useState(false)    
 
-    const administrador = ()=>{
-        setAdmin(true)
-    }
-    
-    const datosComprador =(valores)=>{
-                
-        setComprador({
-            nombre:valores.nombre,
-            email:valores.correo,
-            direccion:valores.direccion,
-            telefono:valores.telefono})
-        setDatosIngresados(true)
-        if (window.location.pathname === "/login"){window.history.back()};
+    const [idCompra, setIdCompra] = useState("")
+    const [idComprador, setIdComprador] = useState("")
+    const [admin, setAdmin] = useState(false)    
+   
+    const userId =(id)=>{
+        if(id === "rKwcK1k211apINg4zJR8nSX30i62"){
+            setAdmin(true)}
+        else{ setAdmin(false)}
+        setIdComprador(id)
     }
 
     useEffect(() => {
@@ -35,9 +27,9 @@ const CustomProvider = ({children})=>{
 
 
     const finalizarCompra = ()=>{
-        if(datosIngresados){
+        if(idComprador){
             const ventaCollection = collection(db, "ventas");
-                    addDoc(ventaCollection,{comprador,items:itemsCarrito,date:serverTimestamp(),total:sumaCarrito.precio})
+                    addDoc(ventaCollection,{idComprador,items:itemsCarrito,date:serverTimestamp(),total:sumaCarrito.precio})
                     .then(result =>{
                         setIdCompra(result.id)
                         actualizarStock()
@@ -105,11 +97,9 @@ const CustomProvider = ({children})=>{
         borrarCarrito,
         quitarItem,
         finalizarCompra,
-        datosIngresados,
-        comprador,
-        datosComprador,
         idCompra,
-        administrador,
+        userId,
+        idComprador,
         admin
         }
     
