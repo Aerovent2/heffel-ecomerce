@@ -21,7 +21,6 @@ const Login = () => {
     }
 
 	const ingresar =(valores)=>{
-		console.log("ingresar")
 		const auth = getAuth(app);
 		signInWithEmailAndPassword(auth, valores.email, valores.pass)
 			.then((userCredential) => {
@@ -62,7 +61,6 @@ const Login = () => {
 				}}
 				onSubmit={(valores) => {
 					ingresar(valores) 
-					
 				}}
 			>
 				{( {errors} ) => (

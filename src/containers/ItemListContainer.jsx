@@ -58,8 +58,8 @@ export const ItemListContainer=({greeting, color, tamanio})=>{//estilos y saludo
                 setTitulo("Ups...")
             }
         })
-        .catch(()=>{
-            console.log("algo salio mal")
+        .catch((e)=>{
+            console.log(e)
         })  
     },[id,admin]);
 

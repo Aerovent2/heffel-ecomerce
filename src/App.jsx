@@ -8,6 +8,7 @@ import CustomProvider from "./context/CartContext";
 import { CartContainer } from "./containers/CartContainer";
 import CargarProductos from "./components/CargarProductos";
 import LoginContainer from "./containers/LoginContainer";
+import VentasContainer from "./containers/VentasContainer";
 
 const App = ()=>{
   return(
@@ -21,6 +22,7 @@ const App = ()=>{
           <Route path="/cart" element={<CartContainer></CartContainer>}/>
           <Route path="/login" element={<LoginContainer></LoginContainer>}/>
           <Route path="/nuevo" element={<CargarProductos></CargarProductos>}/>
+          <Route path="/ventas" element={<VentasContainer></VentasContainer>}/>
           <Route path="*" element={<NotFound></NotFound>}/>
         </Routes>
       </CustomProvider>

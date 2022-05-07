@@ -90,9 +90,7 @@ const Registro = () => {
 					return errores;
 				}}
 				onSubmit={(valores) => {
-					console.log("submit")
 					registrar(valores) 
-					
 				}}
 			>
 				{( {errors} ) => (
