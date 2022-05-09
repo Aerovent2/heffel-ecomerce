@@ -15,7 +15,7 @@ import CartWidget from "./CartWidget";
 import { NavLink } from 'react-router-dom';
 import {useContext} from 'react';
 import { contexto } from '../context/CartContext';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+
 
 const pages = [{Name:"Tintas", Id:1, Url:"categorias/tintas"},
                 {Name:"Resmas", Id:2, Url:"categorias/resmas"},
@@ -109,8 +109,8 @@ const {idComprador,admin} =useContext(contexto)
             </Box>
   
             <Box sx={{ flexGrow: 0 }}>
-            {admin && <NavLink to="/nuevo" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  <AddBoxIcon></AddBoxIcon> </NavLink>}
-            {idComprador? <h4>Salir</h4>
+            {admin && <NavLink to="/admin" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Admin </NavLink>}
+            {idComprador? <NavLink to="/logout" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Salir</NavLink>
             :<NavLink to="/login" style={{color: 'white', textDecoration: 'none' , fontSize:"20px"}}  >  Ingresar</NavLink>}
               
               <NavLink to="/cart" style={{color: 'white'}}  > 

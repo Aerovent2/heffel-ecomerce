@@ -1,13 +1,15 @@
-import React, {useContext} from 'react';
-import {  Button} from '@mui/material';
+import React, {useContext, useState} from 'react';
+import {  Button, Typography} from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc} from 'firebase/firestore';
 import { db,app } from '../db/firebase';
 import { contexto } from '../context/CartContext';
+import {  useNavigate } from 'react-router-dom';
 
 const Registro = () => {
     const {userId} =useContext(contexto)
+	const [error,setError]= useState("")
     const estiloError={
         color: "#e92b2d",
         fontWeight: "600",
@@ -20,10 +22,17 @@ const Registro = () => {
         paddingRight:"5px"
     }
 
+	const path = useNavigate()
+	const volver = ()=>{
+		
+		if (window.location.pathname === "/login"){
+			path("/")
+		}
 
+	}
 
     const registrar =(valores)=>{
-		console.log("registrar")
+		
 		const auth = getAuth(app);
 		createUserWithEmailAndPassword(auth, valores.correo, valores.password)
 			.then((userCredential) => {
@@ -34,16 +43,20 @@ const Registro = () => {
 				nombre:valores.nombre,
 				telefono:valores.telefono
 				}
-
 				setDoc(doc(db,"usuarios",user.uid),usuario)
-					.then (userId(user.uid))
+					.then (()=>{
+						userId(user.uid)
+						volver()
+					})
 					.catch((error) => {
-						const errorCode = error.code;
 						const errorMessage = error.message;
-						console.log(errorCode)
-						console.log(errorMessage)
-				});
+						setError(`Falló registro: ${errorMessage} `)
+					});
 			})
+			.catch((error) => {
+				const errorMessage = error.message;
+				setError(`Falló registro:  ${errorMessage}`)
+			});
 	} 
   return (<>
 	
@@ -82,7 +95,7 @@ const Registro = () => {
 						errores.telefono = 'El numero teltefonico debe ser solo numeros'
 					}
 					if(!valores.password){
-						errores.pasword = 'Por favor ingresa una contraseña'
+						errores.password = 'Por favor ingresa una contraseña'
 					} else if(valores.password < 6){
 						errores.password = 'la contraseña debe ser de 6 digitos o mas'
 					}
@@ -145,6 +158,7 @@ const Registro = () => {
 							/>
 							<ErrorMessage name="password" component={() => (<div style={estiloError}>{errors.password}</div>)} />
 						</div>
+						<Typography color="error" align='center'>{error}</Typography>
 						<Button type="submit" variant="contained"  style={estiloDiv}>registrarme</Button>
 					</Form>
 				)}

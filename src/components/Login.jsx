@@ -1,13 +1,16 @@
-import React, {useContext} from 'react';
-import {  Button, Container } from '@mui/material';
+import React, {useContext,useState} from 'react';
+
+import {  Button, Container ,Typography} from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from '../db/firebase';
 import { contexto } from '../context/CartContext';
-
+import {  useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const {userId} =useContext(contexto)
+	const [error,setError]= useState("")
+	
 	const estiloError={
         color: "#e92b2d",
         fontWeight: "600",
@@ -19,6 +22,14 @@ const Login = () => {
     const estiloLabel ={
         paddingRight:"5px"
     }
+	const path = useNavigate()
+	const volver = ()=>{
+		
+		if (window.location.pathname === "/login"){
+			path("/")
+		}
+
+	}
 
 	const ingresar =(valores)=>{
 		const auth = getAuth(app);
@@ -26,14 +37,13 @@ const Login = () => {
 			.then((userCredential) => {
 				const user = userCredential.user;
 				userId(user.uid)
-				
+				volver()
 			})
 			.catch((error) => {
-				const errorCode = error.code;
 				const errorMessage = error.message;
-				console.log(errorCode,errorMessage)
+				setError(`Falló Autenticacion:   ${errorMessage}`)
 			}); 
-}
+	}
 
 
     return (
@@ -85,6 +95,7 @@ const Login = () => {
 							/>
 							<ErrorMessage name="pass" component={() => (<div style={estiloError}>{errors.pass}</div>)} />
 						</div>
+						<Typography color="error" align='center'>{error}</Typography>
 						<Button type="submit" variant="contained" style={estiloDiv}>ingresar</Button>
 					</Form>
 				)}

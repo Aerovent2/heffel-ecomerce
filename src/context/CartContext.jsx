@@ -15,11 +15,15 @@ const CustomProvider = ({children})=>{
     const [admin, setAdmin] = useState(false)    
    
     const userId =(id)=>{
-        if(id === "rKwcK1k211apINg4zJR8nSX30i62"){
+       if(id === "rKwcK1k211apINg4zJR8nSX30i62"){
             setAdmin(true)}
-        else{ setAdmin(false)}
-        setIdComprador(id)
-    }
+            else{ setAdmin(false)}
+            setIdComprador(id)
+            if(id === null){
+                setAdmin(false)
+                setIdComprador(null)
+            }
+        }
 
     useEffect(() => {
         cantidadItems()

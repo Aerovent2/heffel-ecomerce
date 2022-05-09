@@ -9,6 +9,8 @@ import { CartContainer } from "./containers/CartContainer";
 import CargarProductos from "./components/CargarProductos";
 import LoginContainer from "./containers/LoginContainer";
 import VentasContainer from "./containers/VentasContainer";
+import Logout from "./components/Logout";
+import Admin from "./containers/Admin";
 
 const App = ()=>{
   return(
@@ -21,7 +23,8 @@ const App = ()=>{
           <Route path="/producto/:id" element={<ItemDetailContainer></ItemDetailContainer>}/>
           <Route path="/cart" element={<CartContainer></CartContainer>}/>
           <Route path="/login" element={<LoginContainer></LoginContainer>}/>
-          <Route path="/nuevo" element={<CargarProductos></CargarProductos>}/>
+          <Route path="/logout" element={<Logout></Logout>}/>
+          <Route path="/admin" element={<Admin></Admin>}/>
           <Route path="/ventas" element={<VentasContainer></VentasContainer>}/>
           <Route path="*" element={<NotFound></NotFound>}/>
         </Routes>
