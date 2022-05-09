@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { addDoc, collection, serverTimestamp,updateDoc,doc,getDoc } from 'firebase/firestore';
 import { db } from '../db/firebase';
+import { LocalActivity } from "@mui/icons-material";
 
 export const contexto = createContext();
 const {Provider} = contexto;
@@ -16,17 +17,41 @@ const CustomProvider = ({children})=>{
    
     const userId =(id)=>{
        if(id === "rKwcK1k211apINg4zJR8nSX30i62"){
-            setAdmin(true)}
-            else{ setAdmin(false)}
-            setIdComprador(id)
+            setAdmin(true)
+            localStorage.setItem("admin","true")
+        } else{ 
+            localStorage.setItem("admin","false")
+            setAdmin(false)
+            }
+        
+        setIdComprador(id)
+        localStorage.setItem("id",JSON.stringify(id))
             if(id === null){
                 setAdmin(false)
                 setIdComprador(null)
+                localStorage.setItem("admin","false")
             }
         }
+    
+
+    useEffect(() => {
+        if(localStorage.getItem("carrito")){
+            let carritoStorage = JSON.parse(localStorage.getItem("carrito")) 
+            setItemsCarrito(carritoStorage)
+        }
+        if(localStorage.getItem("id")){
+            let idStorage = JSON.parse(localStorage.getItem("id")) 
+            setIdComprador(idStorage)
+        }
+        if(localStorage.getItem("admin")){
+            let adminStorage = JSON.parse(localStorage.getItem("admin")) 
+            setAdmin(adminStorage)
+        }
+    }, [])
 
     useEffect(() => {
         cantidadItems()
+        localStorage.setItem("carrito",JSON.stringify(itemsCarrito))
     }, [itemsCarrito])
 
 

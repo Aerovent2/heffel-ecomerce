@@ -6,13 +6,14 @@ import NotFound from "./components/NotFound";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CustomProvider from "./context/CartContext";
 import { CartContainer } from "./containers/CartContainer";
-import CargarProductos from "./components/CargarProductos";
 import LoginContainer from "./containers/LoginContainer";
-import VentasContainer from "./containers/VentasContainer";
 import Logout from "./components/Logout";
 import Admin from "./containers/Admin";
 
+
 const App = ()=>{
+  
+
   return(
     <BrowserRouter>
       <CustomProvider>
@@ -25,7 +26,6 @@ const App = ()=>{
           <Route path="/login" element={<LoginContainer></LoginContainer>}/>
           <Route path="/logout" element={<Logout></Logout>}/>
           <Route path="/admin" element={<Admin></Admin>}/>
-          <Route path="/ventas" element={<VentasContainer></VentasContainer>}/>
           <Route path="*" element={<NotFound></NotFound>}/>
         </Routes>
       </CustomProvider>

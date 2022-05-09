@@ -5,7 +5,7 @@ import { contexto } from '../context/CartContext';
 import {  useNavigate } from 'react-router-dom';
 
 const Logout = () => {
-    const {userId} =useContext(contexto)
+    const {userId,borrarCarrito} =useContext(contexto)
     const [error,setError]= useState("")
 
     const path = useNavigate()
@@ -16,6 +16,9 @@ const Logout = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
         userId(null)
+        localStorage.removeItem('id');
+        localStorage.removeItem('admin');
+        borrarCarrito()
         volver()
         }).catch((error) => {
             setError(error)
