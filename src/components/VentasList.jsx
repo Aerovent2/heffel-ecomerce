@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
 import Ventas from "../components/Ventas"
 
 
@@ -6,13 +7,23 @@ import Ventas from "../components/Ventas"
 
 const VentasList =({ventas, usuarios})=>{
     
-const datosVenta=ventas.map((venta)=>{
-    let usuario = usuarios.find(usuario =>usuario.id === venta.idComprador)
-    return ({...usuario,...venta})
-})
+    const [ver, setVer]=useState(false)
+
+    const datosVenta=ventas.map((venta)=>{
+        let usuario = usuarios.find(usuario =>usuario.id === venta.idComprador)
+        return ({...usuario,...venta})
+    })
+    
+    useEffect(() => {
+         if (datosVenta !== []){
+        setVer(true)
+    }
+    }, [])
+    
+   
 
     return(
-        
+       ver ? 
         datosVenta.map((venta)=>{
             return (
             <Grid item xs key={venta.id} >
@@ -20,8 +31,7 @@ const datosVenta=ventas.map((venta)=>{
             </Grid>
             )
         })
-        
-        
+        : <h3>No hay items</h3>
     ) 
 }
 

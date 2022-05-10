@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,6 @@ import logo from "../img/logo.jpg"
 import "./NavBar.css";
 import CartWidget from "./CartWidget";
 import { NavLink } from 'react-router-dom';
-import {useContext} from 'react';
 import { contexto } from '../context/CartContext';
 
 

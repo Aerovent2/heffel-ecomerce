@@ -6,8 +6,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {  Button, Container } from '@mui/material';
 
 
-
 function CargarProductos() {
+
 
     const estiloError={
         color: "#e92b2d",
@@ -130,12 +130,12 @@ function CargarProductos() {
 
                         <div style={estiloDiv}>
 							<label htmlFor="title"style={estiloLabel}>Categoria</label>
-							<Field
-								type="text" 
-								id="category" 
-								name="category" 
-								placeholder="tintas,resmas,perifericos"
-							/>
+							<Field as="select" 	id="category" name="category" >
+								<option value="tintas">Tintas</option>
+								<option value="resmas">Resmas</option>
+								<option value="perifericos">Perifericos</option>
+
+							</Field>
 							<ErrorMessage name="category" component={() => (<div style={estiloError}>{errors.category}</div>)} />
 						</div>
                         <div style={estiloDiv}>

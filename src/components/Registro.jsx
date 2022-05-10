@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {  Button, Typography} from '@mui/material';
+import {  Button, Container, Typography} from '@mui/material';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc} from 'firebase/firestore';
@@ -58,9 +58,9 @@ const Registro = () => {
 				setError(`Falló registro:  ${errorMessage}`)
 			});
 	} 
-  return (<>
-	
-    <Formik
+  return (
+		<Container>
+    		<Formik
 				initialValues={{
 					nombre: '',
 					correo: '',
@@ -163,7 +163,7 @@ const Registro = () => {
 					</Form>
 				)}
 			</Formik>
-  </>)
+		</Container> )
 }
 
 export default Registro
