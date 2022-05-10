@@ -60,6 +60,7 @@ const Registro = () => {
 	} 
   return (
 		<Container>
+			<h1>Ingresa tus datos</h1>
     		<Formik
 				initialValues={{
 					nombre: '',
