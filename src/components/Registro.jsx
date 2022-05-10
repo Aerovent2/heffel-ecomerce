@@ -10,17 +10,25 @@ import {  useNavigate } from 'react-router-dom';
 const Registro = () => {
     const {userId} =useContext(contexto)
 	const [error,setError]= useState("")
-    const estiloError={
+    
+	const estiloError={
         color: "#e92b2d",
         fontWeight: "600",
         fontSize: "12px"
     }
-    const estiloDiv={
-        margin:"20px"
+	const estiloDiv={
+        display:"block",
+		marginTop:"20px",
+		marginLeft:"0px",
+		marginBottom:"10px"
     }
-    const estiloLabel ={
-        paddingRight:"5px"
+  
+	const estiloInput ={
+        paddingRight:"5px",
+		display: "block"
     }
+	
+
 
 	const path = useNavigate()
 	const volver = ()=>{
@@ -59,8 +67,8 @@ const Registro = () => {
 			});
 	} 
   return (
-		<Container>
-			<h1>Ingresa tus datos</h1>
+		<Container sx={{my: "auto", width: 400}}>
+			<h2>Ingresa tus datos</h2>
     		<Formik
 				initialValues={{
 					nombre: '',
@@ -110,8 +118,8 @@ const Registro = () => {
 				{( {errors} ) => (
 					<Form className="formulario">
 						<div style={estiloDiv}>
-							<label htmlFor="nombre"style={estiloLabel}>Nombre</label>
-							<Field
+							<label htmlFor="nombre">Nombre</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="nombre" 
 								name="nombre" 
@@ -120,8 +128,8 @@ const Registro = () => {
 							<ErrorMessage name="nombre" component={() => (<div style={estiloError}>{errors.nombre}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="direccion" style={estiloLabel}>Direccion</label>
-							<Field
+							<label htmlFor="direccion" >Direccion</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="direccion" 
 								name="direccion" 
@@ -130,8 +138,8 @@ const Registro = () => {
 							<ErrorMessage name="direccion" component={() => (<div style={estiloError}>{errors.direccion}</div>)} />
 						</div>
 						<div style={estiloDiv}>
-							<label htmlFor="correo" style={estiloLabel}>Correo</label>
-							<Field
+							<label htmlFor="correo" >Correo</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="correo" 
 								name="correo" 
@@ -140,8 +148,8 @@ const Registro = () => {
 							<ErrorMessage name="correo" component={() => (<div style={estiloError}>{errors.correo}</div>)} />
 						</div>
 						<div style={estiloDiv}> 
-							<label htmlFor="telefono" style={estiloLabel}>Telefono</label>
-							<Field
+							<label htmlFor="telefono" >Telefono</label>
+							<Field style={estiloInput}
 								type="number" 
 								id="telefono    " 
 								name="telefono" 
@@ -150,8 +158,8 @@ const Registro = () => {
 							<ErrorMessage name="telefono" component={() => (<div style={estiloError}>{errors.telefono}</div>)} />
 						</div>
 						<div style={estiloDiv}> 
-							<label htmlFor="password" style={estiloLabel}>Contraseña</label>
-							<Field
+							<label htmlFor="password" >Contraseña</label>
+							<Field style={estiloInput}
 								type="password" 
 								id="password" 
 								name="password" 

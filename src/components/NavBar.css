@@ -1,6 +1,7 @@
 
 img{
     height: 100px;
+    margin-top: 5px;
 }
 .NavBar{
     display: flex;

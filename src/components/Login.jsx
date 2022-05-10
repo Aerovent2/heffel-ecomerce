@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from '../db/firebase';
 import { contexto } from '../context/CartContext';
 import {  useNavigate } from 'react-router-dom';
+import { display } from '@mui/system';
 
 const Login = () => {
 	const {userId} =useContext(contexto)
@@ -17,11 +18,18 @@ const Login = () => {
         fontSize: "12px"
     }
     const estiloDiv={
-        margin:"20px"
+        display:"block",
+		marginTop:"20px",
+		marginLeft:"0px",
+		marginBottom:"10px"
     }
-    const estiloLabel ={
-        paddingRight:"5px"
+  
+	const estiloInput ={
+        paddingRight:"5px",
+		display: "block"
     }
+	
+
 	const path = useNavigate()
 	const volver = ()=>{
 		
@@ -47,8 +55,8 @@ const Login = () => {
 
 
     return (
-		<Container>
-			<h1>Ingresa tus Credenciales</h1>
+		<Container sx={{my: "auto", width: 400}}>
+			<h2>Ingresa tus Credenciales</h2>
 			<Formik
 				initialValues={{
 					email: '',
@@ -75,10 +83,10 @@ const Login = () => {
 				}}
 			>
 				{( {errors} ) => (
-					<Form className="formulario">
+					<Form >
 						<div style={estiloDiv}>
-							<label htmlFor="email" style={estiloLabel}>Correo</label>
-							<Field
+							<label htmlFor="email">Correo</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="email" 
 								name="email" 
@@ -87,8 +95,8 @@ const Login = () => {
 							<ErrorMessage name="email" component={() => (<div style={estiloError}>{errors.email}</div>)} />
 						</div>
 						<div style={estiloDiv}> 
-							<label htmlFor="pass" style={estiloLabel}>Contraseña</label>
-							<Field
+							<label htmlFor="pass" >Contraseña</label>
+							<Field style={estiloInput}
 								type="password" 
 								id="pass" 
 								name="pass" 

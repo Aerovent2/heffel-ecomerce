@@ -12,7 +12,7 @@ const LoginContainer = () => {
     const [registrado,setRegistrado]=useState(false)
   return (<>
     {!registrado? <Login />:<Registro></Registro> }
-    <Container>
+    <Container sx={{my: "auto", width: 400}}>
       <Button type="button"  variant="outlined" onClick={()=>{setRegistrado(!registrado)}}>{!registrado? "No tienes Cuenta?":"Ya te registraste?"}</Button>
     </Container>
     
