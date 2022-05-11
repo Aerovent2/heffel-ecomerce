@@ -1,6 +1,6 @@
-# WS Online ---- Heffel-Ecommerce
+# WS Online ---- Heffel-Ecommerce  [http://ws-online.ml/]
 
-## Ecomerce de un local de computación-
+## Ecommerce de un local de computación-
 
 Es un SPA realizado para que los clientes del local puedan adquirir los artículos de oficina de uso más frecuente, de un modo rápido y sencillo. En esta primera etapa, el repartidor es quien se encarga de cobrar las ventas al momento de hacer la entrega del producto. En una segunda etapa, se completará con el agregado de la api de MercadoPago.
 
@@ -9,7 +9,7 @@ Es un SPA realizado para que los clientes del local puedan adquirir los artícul
 - Permite agregar items al carrito sin estar logueado, pero pide loguin o registro antes de finalizar la compra
 - Al filtrar por categoria da mensaje de error si la categoria esta vacía
 - Guarda sesión y carrito en el localStorage hasta que salis
-- Si agregas items al carrito sin logearte tambien los almacena en localStorage 
+- Si agregas items al carrito sin logearte tambien los almacena en localStorage
 - Verifica stock antes de agregar al carrito y cuando se finaliza la venta pide de nuevo el stock de la BaseDatos para evitar errores de compras simultaneas
 - Valida datos al cargar y editar productos o usuarios
 - Si no esta logueado como administrador no permite la ruta /admin (te devuelve a la home)

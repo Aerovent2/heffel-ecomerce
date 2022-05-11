@@ -9,17 +9,23 @@ import {  Button, Container } from '@mui/material';
 function CargarProductos() {
 
 
-    const estiloError={
+	const estiloError={
         color: "#e92b2d",
         fontWeight: "600",
         fontSize: "12px"
     }
     const estiloDiv={
-        margin:"20px"
+        display:"block",
+		marginTop:"20px",
+		marginLeft:"0px",
+		marginBottom:"10px"
     }
-    const estiloLabel ={
-        paddingRight:"5px"
+  
+	const estiloInput ={
+        paddingRight:"5px",
+		display: "block"
     }
+	
 
     const submitHandler =  (valores)=>{
         const archivo = valores.file;
@@ -50,7 +56,7 @@ function CargarProductos() {
 
     return (
     
-        <Container>
+        <Container sx={{my: "auto", width: 400}}>
 			<h1>Cargar Nuevo Producto</h1>
 			<Formik
 				initialValues={{
@@ -104,10 +110,10 @@ function CargarProductos() {
 				}}
 			>
 				{( {errors, setFieldValue} ) => (
-					<Form className="formulario">
+					<Form >
 						<div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Titulo</label>
-							<Field
+							<label htmlFor="title">Titulo</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="title" 
 								name="title" 
@@ -117,8 +123,8 @@ function CargarProductos() {
 						</div>
 
                         <div style={estiloDiv}>
-							<label htmlFor="desc"style={estiloLabel}>Descripcion</label>
-							<Field
+							<label htmlFor="desc">Descripcion</label>
+							<Field style={estiloInput}
 								type="text" 
 								id="desc" 
 								name="desc" 
@@ -129,8 +135,8 @@ function CargarProductos() {
 
 
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Categoria</label>
-							<Field as="select" 	id="category" name="category" >
+							<label htmlFor="title">Categoria</label>
+							<Field as="select" 	id="category" name="category" style={estiloInput} >
 								<option value="tintas">Tintas</option>
 								<option value="resmas">Resmas</option>
 								<option value="perifericos">Perifericos</option>
@@ -139,8 +145,8 @@ function CargarProductos() {
 							<ErrorMessage name="category" component={() => (<div style={estiloError}>{errors.category}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Stock</label>
-							<Field
+							<label htmlFor="title">Stock</label>
+							<Field style={estiloInput}
 								type="number" 
 								id="stock" 
 								name="stock" 
@@ -149,8 +155,8 @@ function CargarProductos() {
 							<ErrorMessage name="stock" component={() => (<div style={estiloError}>{errors.stock}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="title"style={estiloLabel}>Precio</label>
-							<Field
+							<label htmlFor="title">Precio</label>
+							<Field style={estiloInput}
 								type="number" 
 								id="price" 
 								name="price" 
@@ -159,8 +165,8 @@ function CargarProductos() {
 							<ErrorMessage name="price" component={() => (<div style={estiloError}>{errors.price}</div>)} />
 						</div>
                         <div style={estiloDiv}>
-							<label htmlFor="file"style={estiloLabel}>Imagen</label>
-							<input
+							<label htmlFor="file">Imagen</label>
+							<input style={estiloInput}
 								type="file" 
 								onChange={(e)=>{
                                     setFieldValue("file",e.target.files[0])
