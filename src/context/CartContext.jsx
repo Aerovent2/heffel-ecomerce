@@ -1,8 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { addDoc, collection, serverTimestamp,updateDoc,doc,getDoc } from 'firebase/firestore';
 import { db } from '../db/firebase';
-import { LocalActivity } from "@mui/icons-material";
-
 export const contexto = createContext();
 const {Provider} = contexto;
 

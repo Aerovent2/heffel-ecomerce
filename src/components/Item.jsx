@@ -8,16 +8,15 @@ import Typography from '@mui/material/Typography';
 import {  useNavigate } from 'react-router-dom';
 import { contexto } from '../context/CartContext';
 
+
 const Item= ({item})=>{
+    
     const {admin} =useContext(contexto)
     const path = useNavigate()
     const navegar = ()=>{
         path("/producto/" + item.id)
     }
 
-
-    
-    
     return(
             <Card  sx={{ minWidth: 175, maxWidth:215 }}>
                 <CardContent onClick={navegar}>
